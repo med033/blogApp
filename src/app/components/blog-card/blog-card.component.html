@@ -1,0 +1,24 @@
+<mat-card class="card" [ngClass]="{'red': this.blog.upvote < this.blog.downvote , 'green': this.blog.upvote > this.blog.downvote}" > 
+    <img mat-card-image src="assets/img/blog-3.jpg"
+        >
+    <mat-card-actions>
+            <div class="card-block">
+                <h2 class="card-title"><a href="post.html">{{blog.title}}</a></h2>
+                <p class="card-text" > {{ (blog.content.length>6)? (blog.content | slice:0:200)+'...':(blog.content) }}
+                    <br>
+                <button style="margin-left: 30%;background-color: azure;" mat-button (click)="readMore(blog._id)">
+                read more
+                </button>
+        
+            </div>
+     
+        <mat-card-header>   
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title >{{blog.authorName}}</mat-card-title>
+        </mat-card-header>
+          <mat-card-actions style="margin-left: 70%;">
+                <button  [matBadge]="this.blog.upvote" matBadgeColor="accent" (click)="up(blog._id)"  mat-button><mat-icon >thumb_up</mat-icon></button>
+                <button [matBadge]="this.blog.downvote" matBadgeColor="warn" (click)="down(blog._id)"  mat-button><mat-icon>thumb_down</mat-icon></button>
+            </mat-card-actions>
+    </mat-card-actions>
+</mat-card>
