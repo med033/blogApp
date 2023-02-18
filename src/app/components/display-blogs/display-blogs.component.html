@@ -1,4 +1,4 @@
-<!-- Begin List Posts
+<!-- Begin List blogs
 	================================================== -->
 <section class="recent-posts">
     <div class="section-title">
@@ -9,11 +9,11 @@
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
     <div class="card-columns listrecent">
-        <div *ngFor='let blog of blogs | filter : searchText'>
+        <div *ngFor="let blog of blogs | filter:'authorName,title,content':searchText">
             <app-blog-card [blog]="blog"></app-blog-card>
         </div>
     </div>
 
 </section>
-<!-- End List Posts
+<!-- End List blogs
         ================================================== -->

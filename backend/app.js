@@ -14,7 +14,7 @@ const app = express();
 
 
 //import model Blog
-const Blog =require('./models/blog');
+const Blog = require('./models/blog');
 
 // Connect to Data Base
 mongoose.connect('mongodb://localhost:27017/BlogDB', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -44,74 +44,40 @@ app.use((req, res, next) => {
 
 //Add blog
 app.post('/api/addBlog', (req, res) => {
-    //Etape1
-    console.log('Here Function addBLog');
-
-    // let url = req.protocol + '://' + req.get('host');
-    // console.log("body", req.body);
-    // Blog.findOne({ type: req.body.type}).then(
-    //     (doc) => {
-    //         if (doc) {
-    //             res.status(200).json({
-    //                 message: "Product already exist"
-    //             })
-
-    //         } else {
-
-                let blog = new Blog({
-                    authorName: req.body.authorName,
-                    title: req.body.title,
-                    content: req.body.content,
-                    upvote:"req.body.upvote",
-                    downvote:req.body.downvote
-
-                });
-
-                //Etape2
-                blog.save();
-
-                //Etape3
-                res.status(200).json({
-                    message: 'Blog added with  success'
-                })
-
-           
-
-
-            }
-        
-    )
+    let blog = new Blog({
+        authorName: req.body.authorName,
+        title: req.body.title,
+        content: req.body.content,
+        upvote: "req.body.upvote",
+        downvote: req.body.downvote
+    });
+    blog.save();
+    res.status(200).json({
+        message: 'Blog added with  success'
+    })
+})
 
 //get all blogs
-app.get('/api/allBlogs', (req, res) => {
-        console.log("Here in function get All Blogs");
-    
-        //Etape 1
-        Blog.find((err, docs) => {
-            if (err) {
-                console.log("Error in DB");
-            } else {
-                //Success
-                res.status(200).json({
-                    blogs: docs
-                })
-            }
-        })
-    
+app.get('/api/allBlogs', (res) => {
+    Blog.find((err, docs) => {
+        if (err) {
+            console.log("Error in DB");
+        } else {
+            res.status(200).json({
+                blogs: docs
+            })
+        }
     })
+})
 
 //get blog by id 
-app.get('/api/allBlogs/:id', (req, res) =>{
-    console.log('Here in Function get blog by ID');
-
+app.get('/api/allBlogs/:id', (req, res) => {
     let id = req.params.id;
-    console.log('id Blog by id', id);
-
-    Product.findOne({_id : id}).then(
+    Product.findOne({ _id: id }).then(
         (doc) => {
             console.log('finded Blog', doc);
             res.status(200).json({
-                blog:doc
+                blog: doc
             })
         }
     )
@@ -119,66 +85,23 @@ app.get('/api/allBlogs/:id', (req, res) =>{
 
 //edit blog upvote and downvote
 
-app.put('/api/allBlogs/:id', (req,res) =>{
-    console.log("here in function edit blog");
-    
+app.put('/api/allBlogs/:id', (req, res) => {
     let blog = {
-        _id :req.body._id,
+        _id: req.body._id,
         authorName: req.body.authorName,
         title: req.body.title,
         content: req.body.content,
-        upvote:req.body.upvote,
-        downvote:req.body.downvote
-    
+        upvote: req.body.upvote,
+        downvote: req.body.downvote
     };
-    Blog.updateOne({_id : req.body._id},blog).then(
-    (result)=>{
-    
-        console.log("result update", result);
-        res.status(200).json({
-            message : "edited with success"
-        });
-    }
-    
-    
+    Blog.updateOne({ _id: req.body._id }, blog).then(
+        (result) => {
+            res.status(200).json({
+                message: "edited with success"
+            });
+        }
     )
-    } )
-
-
-// //search filter full text  
-
-
-// app.post('/api/searchBlog', (req, res) => {
-//     console.log('here in search blog',);
-
-//     //etape 1 : recuperation of value 
-//     let searchValue = req.body.searchValue;
-
-//     console.log("searchValue", searchValue);
-
-//     //etape 2 : search 
-
-//     Blog.find({
-//         $or: [
-//             { authorName: {$regex: `.*${searchValue}` }},
-//             { title: {$regex: `.*${searchValue}` }},
-//             { content: {$regex: `.*${searchValue}` }},
-//         ]
-//     }).then(
-//         (docs) => {
-//             if (docs) {
-//                 console.log("result", docs);
-//                 res.status(200).json({
-//                     chefs: docs
-//                 })
-
-//             }
-//         }
-
-//     )
-
-
-// })
+})
 
 //Export App
 module.exports = app;

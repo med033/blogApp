@@ -1,24 +1,26 @@
 .example-header-image {
-    background-image: url('https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x');
-    background-size: cover;
-  }
-  .limitTextHeight {
-    height: 50px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  background-image: url('https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x');
+  background-size: cover;
+}
+
+.limitTextHeight {
+  height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mat-card-header .mat-card-title {
   font-size: 15px;
 }
+
 .mat-card-image {
   height: 220px;
 }
 
-.red{
-border:3px solid red ;  
+.red {
+  border: 3px solid red;
 }
 
-.green{
-border:3px solid green ;  
+.green {
+  border: 3px solid green;
 }

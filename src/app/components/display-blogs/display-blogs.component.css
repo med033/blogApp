@@ -9,3 +9,13 @@
     margin-bottom: 20px;
     margin-left: 10px;
 }
+
+.card-columns {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    direction:ltr;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem;
+}
